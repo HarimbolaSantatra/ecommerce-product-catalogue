@@ -36,10 +36,17 @@ public class MainController : ControllerBase
 
     [Route("/{productId}")]
     [HttpGet]
-    public string GetProduct(int productId)
+    public ActionResult GetProduct(int productId)
     {
 	var product = _context.Products.Where(p => p.Id == productId).ToList().SingleOrDefault();
-	return( JsonSerializer.Serialize(product) );
+	JsonResult res;
+	res = new JsonResult("{'status': 'empty'}");
+	if ( product == null )
+	{
+	    res.StatusCode = 404 ;
+	    return res;
+	}
+	return( new JsonResult(JsonSerializer.Serialize(product)) );
     }
 
     [Route("/add")]
