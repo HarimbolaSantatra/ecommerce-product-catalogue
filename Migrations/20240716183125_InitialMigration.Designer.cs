@@ -10,8 +10,8 @@ using ProductCatalogue.Models;
 namespace ShoppingCart.Migrations
 {
     [DbContext(typeof(CatalogueDbContext))]
-    [Migration("20240716174834_InitialMigrations")]
-    partial class InitialMigrations
+    [Migration("20240716183125_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,9 +27,15 @@ namespace ShoppingCart.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
